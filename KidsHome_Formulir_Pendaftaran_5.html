@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KidsHome Samarinda — Formulir Pendaftaran Murid Baru</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --teal-dark:#0B3D36;
+    --teal:#2D9A8F;
+    --teal-light:#7FD8C9;
+    --lemon:#F4E04D;
+    --lemon-deep:#E0C71A;
+    --cream:#FBF8E8;
+    --cream-deep:#F2ECC8;
+    --ink:#0B3D36;
+    --muted:#5C6F6A;
+    --white:#FFFFFF;
+    --error:#C0392B;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;}
+  h1,h2,h3,.display{font-family:'Baloo 2',sans-serif}
+  .wrap{max-width:600px;margin:0 auto;padding:0 20px}
+
+  /* HERO */
+  .hero{background:var(--teal);position:relative;padding:0 0 56px;overflow:hidden;border-radius:0 0 36px 36px;}
+  .hero::before{content:"";position:absolute;width:220px;height:220px;background:var(--lemon);opacity:.18;border-radius:50%;top:-90px;right:-70px;}
+  .hero::after{content:"";position:absolute;width:140px;height:140px;background:var(--teal-light);opacity:.25;border-radius:50%;bottom:20px;left:-60px;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:20px 20px 0;position:relative;z-index:2;}
+  .topbar .tag{display:flex;align-items:center;gap:8px}
+  .topbar .dot{width:8px;height:8px;border-radius:50%;background:var(--lemon)}
+  .topbar span{color:var(--teal-light);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .topbar .year{color:rgba(255,255,255,.7);font-size:12px;font-weight:600}
+  .mascot{width:118px;height:118px;margin:14px auto 4px;display:block;position:relative;z-index:2;}
+  .hero h1{text-align:center;color:var(--white);font-size:26px;font-weight:700;line-height:1.3;position:relative;z-index:2;padding:0 30px;}
+  .hero h1 em{font-style:normal;color:var(--lemon);}
+  .hero p.sub{text-align:center;color:#D8F0EB;font-size:14.5px;font-weight:500;margin-top:10px;position:relative;z-index:2;padding:0 34px;}
+  .hero .slogan{text-align:center;color:var(--lemon);font-size:13.5px;font-weight:700;margin-top:14px;position:relative;z-index:2;padding:10px 28px 0;font-family:'Baloo 2',sans-serif;}
+
+  /* PROGRESS */
+  .progress-wrap{position:sticky;top:0;z-index:50;background:var(--cream);padding:14px 20px 10px;border-bottom:1px solid #E7E2CB;}
+  .progress-track{height:6px;background:#E7E2CB;border-radius:6px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--teal);border-radius:6px;width:8%;transition:width .3s ease;}
+  .progress-label{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:6px;font-weight:600;}
+
+  /* STEPS */
+  .step{display:none;padding:24px 0 8px;animation:fadeUp .3s ease;}
+  .step.active{display:block;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .step-eyebrow{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+  .step-eyebrow::before{content:"";width:16px;height:3px;border-radius:2px;background:var(--lemon);}
+  .step h2{font-size:21px;margin-bottom:6px;}
+  .step p.lead{color:var(--muted);font-size:13.5px;margin-bottom:20px;}
+
+  .form-card{background:var(--white);border-radius:22px;padding:24px 20px;border:1px solid #E7E2CB;}
+
+  .field{margin-bottom:18px;}
+  .field:last-child{margin-bottom:0;}
+  .field label{display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px;}
+  .field label .req{color:#D4537E;}
+  .field .help{font-size:12px;color:#8B8770;margin-top:6px;line-height:1.5;}
+  .field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1.5px solid #E2DEC6;border-radius:12px;font-size:15px;font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);transition:border-color .15s,background .15s;appearance:none;}
+  .field textarea{resize:vertical;min-height:80px;}
+  .field input::placeholder,.field textarea::placeholder{color:#A8A48C;}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);background:var(--white);}
+  .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%230B3D36' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer;}
+  .field.has-error input,.field.has-error select,.field.has-error textarea{border-color:#E59999;}
+  .error-msg{font-size:12px;color:var(--error);margin-top:6px;display:none;}
+  .field.has-error .error-msg{display:block;}
+
+  /* CHIPS */
+  .chip-grid{display:grid;gap:9px;}
+  .chip-grid.cols-2{grid-template-columns:repeat(2,1fr);}
+  .chip{border:1.5px solid #E2DEC6;background:var(--cream);border-radius:12px;padding:12px 14px;cursor:pointer;transition:.15s;user-select:none;display:flex;align-items:flex-start;gap:10px;}
+  .chip:hover{border-color:var(--teal-light);}
+  .chip.active{background:#E9F7F4;border-color:var(--teal);}
+  .chip-radio-dot{width:18px;height:18px;border-radius:50%;border:2px solid #C9C4A8;flex-shrink:0;margin-top:1px;position:relative;transition:.15s;}
+  .chip.active .chip-radio-dot{border-color:var(--teal);}
+  .chip.active .chip-radio-dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--teal);}
+  .chip-checkbox{width:18px;height:18px;border-radius:6px;border:2px solid #C9C4A8;flex-shrink:0;margin-top:1px;position:relative;transition:.15s;}
+  .chip.active .chip-checkbox{border-color:var(--teal);background:var(--teal);}
+  .chip.active .chip-checkbox::after{content:"";position:absolute;left:4px;top:0px;width:5px;height:9px;border:solid white;border-width:0 2px 2px 0;transform:rotate(45deg);}
+  .chip-content .chip-title{font-size:14px;font-weight:600;color:var(--ink);}
+  .chip-content .chip-sub{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4;}
+  .chip.compact{padding:11px 12px;}
+  .chip.compact .chip-content .chip-title{font-size:13.5px;}
+
+  /* DAY PILLS */
+  .day-pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .day-pill{border:1.5px solid #E2DEC6;background:var(--cream);border-radius:20px;padding:9px 16px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:.15s;user-select:none;}
+  .day-pill.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+
+  /* BUTTONS */
+  .btn-row{display:flex;gap:10px;margin-top:24px;}
+  .btn{flex:1;padding:15px;border-radius:14px;font-size:15px;font-weight:700;font-family:'Baloo 2',sans-serif;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,background .15s;}
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:var(--lemon);color:var(--teal-dark);}
+  .btn-primary:hover{background:var(--lemon-deep);}
+  .btn-secondary{background:var(--white);color:var(--teal-dark);border:1.5px solid #E2DEC6;flex:0 0 110px;}
+  .btn-secondary:hover{background:var(--cream);}
+
+  /* REVIEW */
+  .review-section{margin-bottom:16px;}
+  .review-section h4{font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;}
+  .review-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #F0ECD8;font-size:13.5px;}
+  .review-row:last-child{border-bottom:none;}
+  .review-row .k{color:var(--muted);flex-shrink:0;}
+  .review-row .v{font-weight:600;text-align:right;}
+
+  /* DONE */
+  .done-card{display:none;text-align:center;padding:30px 20px 10px;}
+  .done-card.show{display:block;animation:fadeUp .35s ease;}
+  .done-emoji{font-size:48px;margin-bottom:12px;}
+  .done-card h2{font-size:22px;margin-bottom:8px;}
+  .done-card p{color:var(--muted);font-size:14px;margin-bottom:24px;}
+  .wa-btn{display:flex;align-items:center;justify-content:center;gap:9px;background:#25D366;color:#fff;border:none;padding:16px;border-radius:14px;font-size:15.5px;font-weight:700;font-family:'Baloo 2',sans-serif;text-decoration:none;width:100%;}
+  .wa-btn svg{width:20px;height:20px;flex-shrink:0;}
+
+  /* INFO NOTE */
+  .info-note{background:#E9F7F4;border:1px solid #BFE7E0;border-radius:14px;padding:14px 16px;font-size:13px;color:#0F5C52;line-height:1.6;margin-top:14px;}
+  .info-note strong{color:var(--teal-dark);}
+
+  /* TRUST CARD */
+  .price-trust-card{background:linear-gradient(135deg,var(--teal-dark) 0%,var(--teal) 100%);border-radius:20px;padding:22px 20px;margin-bottom:18px;color:var(--white);}
+  .price-trust-card h3{font-size:16.5px;line-height:1.5;margin-bottom:10px;}
+  .price-trust-card h3 .accent{color:var(--lemon);}
+  .price-trust-card p{font-size:13px;color:#D8F0EB;line-height:1.7;}
+  .trust-benefits{display:grid;gap:9px;margin-top:14px;}
+  .trust-benefit{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.1);border-radius:12px;padding:11px 12px;}
+  .trust-benefit .emoji{font-size:18px;flex-shrink:0;line-height:1.3;}
+  .trust-benefit .txt{font-size:12.5px;line-height:1.5;color:#EAF6F2;}
+  .trust-benefit .txt strong{color:var(--lemon);font-weight:700;}
+
+  /* PRICE TABLES */
+  .price-section-label{font-size:17px;font-weight:700;color:var(--ink);margin:20px 0 12px;font-family:'Baloo 2',sans-serif;}
+  .level-tabs{display:flex;gap:7px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px;scrollbar-width:none;}
+  .level-tabs::-webkit-scrollbar{display:none;}
+  .level-tab{flex:0 0 auto;padding:9px 16px;border-radius:20px;font-size:13px;font-weight:600;background:var(--white);border:1.5px solid #E2DEC6;color:var(--muted);cursor:pointer;white-space:nowrap;transition:.15s;}
+  .level-tab.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+  .price-panel{display:none;}
+  .price-panel.active{display:block;animation:fadeUp .25s ease;}
+  .price-card{background:var(--white);border:1px solid #E7E2CB;border-radius:18px;padding:16px 16px 6px;margin-bottom:12px;}
+  .price-card .dur-label{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--teal-dark);margin-bottom:10px;}
+  .price-card .dur-label .dot{width:6px;height:6px;border-radius:50%;background:var(--lemon-deep);}
+  .price-table{width:100%;border-collapse:collapse;}
+  .price-table th{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;text-align:left;padding:6px 4px;border-bottom:1.5px solid #EDE9D4;}
+  .price-table th.num{text-align:right;}
+  .price-table td{padding:10px 4px;font-size:13.5px;border-bottom:1px solid #F2EEDC;}
+  .price-table td.num{text-align:right;font-weight:700;color:var(--ink);}
+  .price-table tr:last-child td{border-bottom:none;}
+  .price-table .pertemuan{font-weight:600;color:var(--ink);}
+  .price-table tr.popular td{background:#FBF8E8;}
+  .price-table tr.popular .pertemuan::after{content:"Populer";display:inline-block;margin-left:6px;font-size:9.5px;font-weight:700;background:var(--lemon);color:var(--teal-dark);padding:2px 7px;border-radius:8px;vertical-align:1px;}
+  .price-note{background:#E9F7F4;border:1px solid #BFE7E0;border-radius:14px;padding:13px 15px;font-size:12.5px;color:#0F5C52;line-height:1.6;margin:6px 0 14px;}
+  .price-note strong{color:var(--teal-dark);}
+
+  /* SIBLING COMBO SELECT */
+  .sibling-select-wrap{margin-bottom:14px;}
+  .sibling-select-wrap label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px;}
+  .sibling-select-wrap select{width:100%;padding:12px 14px;border:1.5px solid #E2DEC6;border-radius:12px;font-size:14px;font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%230B3D36' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;}
+  .sibling-select-wrap select:focus{outline:none;border-color:var(--teal);}
+
+  /* PAYMENT INFO */
+  .payment-info{background:var(--white);border:1.5px solid #E2DEC6;border-radius:18px;padding:18px 16px;margin-bottom:18px;}
+  .payment-title{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:700;color:var(--teal-dark);margin-bottom:12px;}
+  .payment-options{display:grid;gap:10px;}
+  .payment-option{display:flex;align-items:flex-start;gap:12px;background:var(--cream);border-radius:12px;padding:12px 14px;}
+  .payment-option-icon{font-size:18px;flex-shrink:0;line-height:1.3;}
+  .payment-option-label{font-size:13.5px;font-weight:700;color:var(--teal-dark);margin-bottom:3px;}
+  .payment-option-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+  .payment-option-desc strong{color:var(--ink);}
+
+  /* RULES LIST */
+  .rules-list{display:grid;gap:12px;}
+  .rule-item{display:flex;align-items:flex-start;gap:11px;background:var(--cream);border:1px solid #E7E2CB;border-radius:14px;padding:13px 14px;}
+  .rule-icon{font-size:18px;flex-shrink:0;line-height:1.4;}
+  .rule-text{font-size:12.5px;line-height:1.6;color:var(--ink);}
+  .rule-text strong{color:var(--teal-dark);}
+
+  /* PROMO POSTER */
+  .promo-poster{background:linear-gradient(160deg,var(--teal-dark) 0%,var(--teal) 55%,#1F8478 100%);border-radius:24px;padding:26px 20px 22px;color:var(--white);position:relative;overflow:hidden;}
+  .promo-poster::before{content:"";position:absolute;width:160px;height:160px;background:var(--lemon);opacity:.15;border-radius:50%;top:-60px;right:-50px;}
+  .promo-badge{display:inline-block;background:var(--lemon);color:var(--teal-dark);font-family:'Baloo 2',sans-serif;font-weight:800;font-size:12px;letter-spacing:.04em;padding:6px 14px;border-radius:20px;margin-bottom:14px;position:relative;z-index:2;}
+  .promo-title{font-size:19px;line-height:1.4;margin-bottom:4px;position:relative;z-index:2;}
+  .promo-sub{font-size:13px;color:#D8F0EB;margin-bottom:18px;position:relative;z-index:2;}
+  .promo-card{background:rgba(255,255,255,.97);border-radius:16px;padding:16px;display:flex;gap:12px;margin-bottom:12px;position:relative;z-index:2;}
+  .promo-card-icon{font-size:28px;flex-shrink:0;line-height:1;}
+  .promo-card-title{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:15px;color:var(--teal-dark);margin-bottom:4px;}
+  .promo-card-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:10px;}
+  .promo-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .promo-price-old{font-size:13px;color:#A8A48C;text-decoration:line-through;}
+  .promo-price-new{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:19px;color:var(--teal);}
+  .promo-price-unit{font-size:12px;color:var(--muted);font-weight:600;}
+  .promo-footer-note{font-size:12.5px;color:#D8F0EB;text-align:center;margin-top:14px;position:relative;z-index:2;line-height:1.6;}
+
+  footer{text-align:center;padding:32px 20px 40px;color:var(--muted);font-size:12px;}
+  footer .fname{font-family:'Baloo 2',sans-serif;color:var(--teal);font-weight:700;font-size:14px;margin-bottom:4px;}
+
+  @media (max-width:380px){
+    .hero h1{font-size:23px;}
+    .chip-grid.cols-2{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="topbar wrap">
+    <div class="tag"><span class="dot" aria-hidden="true"></span><span>Penerimaan murid baru</span></div>
+    <span class="year">2026/2027</span>
+  </div>
+  <svg class="mascot" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Maskot rumah KidsHome">
+    <circle cx="300" cy="300" r="290" fill="#1F8478"/>
+    <circle cx="300" cy="300" r="290" fill="none" stroke="#F4E04D" stroke-width="10"/>
+    <g transform="translate(300, 300)">
+      <rect x="-130" y="-65" width="260" height="220" rx="42" fill="#FBF8E8"/>
+      <path d="M -165 -65 L 0 -215 L 165 -65 Q 165 -42 142 -42 L -142 -42 Q -165 -42 -165 -65 Z" fill="#0B3D36"/>
+      <path d="M -100 -116 L 0 -202 L 100 -116 L 67 -116 L 0 -166 L -67 -116 Z" fill="#F4E04D"/>
+      <rect x="67" y="-184" width="36" height="58" rx="8" fill="#0B3D36"/>
+      <circle cx="-71" cy="-8" r="29" fill="#fff"/><circle cx="71" cy="-8" r="29" fill="#fff"/>
+      <circle cx="-62" cy="-3" r="14.5" fill="#0B3D36"/><circle cx="79" cy="-3" r="14.5" fill="#0B3D36"/>
+      <circle cx="-57" cy="-8" r="5" fill="#fff"/><circle cx="84" cy="-8" r="5" fill="#fff"/>
+      <circle cx="-102" cy="38" r="13.5" fill="#F4E04D" opacity="0.7"/><circle cx="102" cy="38" r="13.5" fill="#F4E04D" opacity="0.7"/>
+      <path d="M -37 35 Q 0 62 37 35" fill="none" stroke="#0B3D36" stroke-width="7.5" stroke-linecap="round"/>
+      <path d="M -130 73 Q -175 86 -169 128" fill="none" stroke="#0B3D36" stroke-width="17" stroke-linecap="round"/>
+      <path d="M 130 73 Q 175 86 169 128" fill="none" stroke="#0B3D36" stroke-width="17" stroke-linecap="round"/>
+      <g transform="translate(0, 134)">
+        <rect x="-60" y="-24" width="120" height="48" rx="6" fill="#0B3D36"/>
+        <rect x="-54" y="-18" width="51" height="36" rx="3" fill="#fff"/><rect x="3" y="-18" width="51" height="36" rx="3" fill="#fff"/>
+        <line x1="0" y1="-18" x2="0" y2="18" stroke="#0B3D36" stroke-width="3"/>
+        <line x1="-45" y1="-7" x2="-12" y2="-7" stroke="#7FD8C9" stroke-width="3"/><line x1="-45" y1="4" x2="-12" y2="4" stroke="#7FD8C9" stroke-width="3"/>
+        <line x1="12" y1="-7" x2="45" y2="-7" stroke="#7FD8C9" stroke-width="3"/><line x1="12" y1="4" x2="45" y2="4" stroke="#7FD8C9" stroke-width="3"/>
+      </g>
+      <ellipse cx="-39" cy="165" rx="19" ry="9.5" fill="#0B3D36"/><ellipse cx="39" cy="165" rx="19" ry="9.5" fill="#0B3D36"/>
+    </g>
+  </svg>
+  <h1>Formulir Pendaftaran<br><em>KidsHome</em> Samarinda</h1>
+  <p class="sub">Guru privat datang ke rumah. Isi data di bawah, admin akan menghubungi via WhatsApp untuk konfirmasi jadwal.</p>
+  <p class="slogan">🌱 Tumbuh kembang anak adalah investasi terbaik — pendampingan yang tepat sejak dini akan membentuk masa depannya.</p>
+</div>
+
+<div class="progress-wrap">
+  <div class="wrap" style="padding:0">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label"><span id="progressText">Langkah 1 dari 7</span><span id="progressPct">Data Anak</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+<form id="regForm" novalidate>
+
+<!-- ===== STEP 1: DATA ANAK ===== -->
+<div class="step active" data-step="1">
+  <div class="step-eyebrow">Langkah 1</div>
+  <h2>Data Calon Murid</h2>
+  <p class="lead">Form ini diisi untuk data per anak ya, Ayah/Bunda.</p>
+  <div class="form-card">
+    <div class="field" id="field-nama">
+      <label for="nama">Nama lengkap anak <span class="req">*</span></label>
+      <input type="text" id="nama" placeholder="Contoh: Aisyah Putri">
+      <p class="error-msg">Nama anak wajib diisi</p>
+    </div>
+    <div class="field" id="field-jk">
+      <label>Jenis kelamin <span class="req">*</span></label>
+      <div class="chip-grid cols-2" id="jkGrid">
+        <div class="chip compact" data-value="Laki-laki"><div class="chip-radio-dot"></div><div class="chip-content"><div class="chip-title">Laki-laki</div></div></div>
+        <div class="chip compact" data-value="Perempuan"><div class="chip-radio-dot"></div><div class="chip-content"><div class="chip-title">Perempuan</div></div></div>
+      </div>
+      <p class="error-msg">Pilih jenis kelamin anak</p>
+    </div>
+    <div class="field" id="field-usia">
+      <label for="usia">Usia anak saat ini <span class="req">*</span></label>
+      <input type="text" id="usia" placeholder="Contoh: 5 tahun">
+      <p class="error-msg">Usia anak wajib diisi</p>
+    </div>
+    <div class="field" id="field-jenjang">
+      <label for="jenjang">Jenjang &amp; kelas saat ini <span class="req">*</span></label>
+      <select id="jenjang">
+        <option value="">Pilih jenjang</option>
+        <option value="Belum Sekolah">Belum Sekolah</option>
+        <option value="Pra Calistung (4-5 tahun)">Pra Calistung (4-5 tahun)</option>
+        <option value="TK/PAUD">TK / PAUD</option>
+        <option value="1 SD">1 SD</option><option value="2 SD">2 SD</option><option value="3 SD">3 SD</option>
+        <option value="4 SD">4 SD</option><option value="5 SD">5 SD</option><option value="6 SD">6 SD</option>
+        <option value="7 SMP">7 SMP</option><option value="8 SMP">8 SMP</option><option value="9 SMP">9 SMP</option>
+      </select>
+      <p class="error-msg">Pilih jenjang &amp; kelas anak</p>
+    </div>
+    <div class="field" id="field-sekolah">
+      <label for="sekolah">Asal sekolah anak</label>
+      <input type="text" id="sekolah" placeholder="Kosongkan jika belum sekolah">
+    </div>
+  </div>
+  <div class="btn-row">
+    <button type="button" class="btn btn-primary" style="width:100%" onclick="nextStep()">Lanjut →</button>
+  </div>
+</div>
+
+<!-- ===== STEP 2: PROGRAM ===== -->
+<div class="step" data-step="2">
+  <div class="step-eyebrow">Langkah 2</div>
+  <h2>Pilihan Program Bimbingan</h2>
+  <p class="lead">Pilih satu program utama yang ingin diambil.</p>
+  <div class="form-card">
+    <div class="field" id="field-program">
+      <div class="chip-grid" id="programGrid">
+        <div class="chip" data-value="TK/PAUD (Calistung)">
+          <div class="chip-radio-dot"></div>
+          <div class="chip-content"><div class="chip-title">TK / PAUD (Calistung)</div><div class="chip-sub">Membaca, menulis, berhitung dasar</div></div>
+        </div>
+        <div class="chip" data-value="SD Kelas 1-6">
+          <div class="chip-radio-dot"></div>
+          <div class="chip-content"><div class="chip-title">SD Kelas 1–6</div><div class="chip-sub">Semua mapel atau mapel tertentu</div></div>
+        </div>
+        <div class="chip" data-value="SMP Kelas 7-9">
+          <div class="chip-radio-dot"></div>
+          <div class="chip-content"><div class="chip-title">SMP Kelas 7–9</div><div class="chip-sub">Maks. 2 mata pelajaran per sesi</div></div>
+        </div>
+      </div>
+      <p class="error-msg">Pilih salah satu program bimbingan</p>
+    </div>
+    <div class="field" id="field-mapel" style="margin-top:18px">
+      <label for="mapel">Mata pelajaran tertentu (opsional)</label>
+      <input type="text" id="mapel" placeholder="Contoh: Matematika &amp; IPA, atau 'Semua Mapel'">
+      <p class="help">Untuk TK/PAUD boleh dikosongkan. Untuk SMP sebutkan 2 mapel pilihan.</p>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">← Kembali</button>
+    <button type="button" class="btn btn-primary" onclick="nextStep()">Lanjut →</button>
+  </div>
+</div>
+
+<!-- ===== STEP 3: PAKET & DURASI ===== -->
+<div class="step" data-step="3">
+  <div class="step-eyebrow">Langkah 3</div>
+  <h2>Paket &amp; Durasi Les</h2>
+  <p class="lead">Pilih cara belajar dan jumlah pertemuan.</p>
+
+  <!-- Trust card -->
+  <div class="price-trust-card">
+    <h3>Pendidikan anak yang berkualitas, ditemani guru yang <span class="accent">profesional &amp; kreatif</span> 🌟</h3>
+    <p>Setiap guru KidsHome dipilih dan dibina dengan sungguh-sungguh — bukan sekadar mengajar, tapi mendampingi tumbuh kembang anak dengan metode yang menyenangkan dan sesuai karakter masing-masing anak.</p>
+    <div class="trust-benefits">
+      <div class="trust-benefit"><span class="emoji">🗣️</span><span class="txt"><strong>Konsultasi perkembangan anak</strong> di awal dan akhir sesi bersama guru</span></div>
+      <div class="trust-benefit"><span class="emoji">🎓</span><span class="txt"><strong>Sertifikat untuk anak</strong> sebagai bentuk apresiasi pencapaian belajar</span></div>
+      <div class="trust-benefit"><span class="emoji">🎮</span><span class="txt"><strong>KIT &amp; Games edukatif</strong> tersedia sebagai add-on opsional</span></div>
+    </div>
+  </div>
+
+  <!-- PRICE SECTION -->
+  <p class="price-section-label">📋 Daftar Harga Paket</p>
+
+  <div class="level-tabs" id="levelTabs">
+    <div class="level-tab active" data-level="tk" onclick="setLevel('tk',this)">TK/PAUD</div>
+    <div class="level-tab" data-level="sd" onclick="setLevel('sd',this)">SD</div>
+    <div class="level-tab" data-level="smp" onclick="setLevel('smp',this)">SMP</div>
+    <div class="level-tab" data-level="saudara" onclick="setLevel('saudara',this)">👫 Paket Saudara</div>
+  </div>
+
+  <!-- TK/PAUD -->
+  <div class="price-panel active" data-panel="tk">
+    <div class="price-card">
+      <div class="dur-label"><span class="dot"></span>Calistung Saja · 60 menit</div>
+      <table class="price-table">
+        <thead><tr><th>Paket</th><th class="num">Total Biaya</th></tr></thead>
+        <tbody id="tbl-tk-60"></tbody>
+      </table>
+    </div>
+    <div class="price-card">
+      <div class="dur-label"><span class="dot"></span>Calistung + Mengaji · 75 menit</div>
+      <table class="price-table">
+        <thead><tr><th>Paket</th><th class="num">Total Biaya</th></tr></thead>
+        <tbody id="tbl-tk-75"></tbody>
+      </table>
+    </div>
+    <div class="price-note">🎒 <strong>Semua paket TK/PAUD (Calistung) sudah termasuk KIT</strong> — alat tulis, name tag, lembar mewarnai edukatif, dan edu-games flashcard tanpa biaya tambahan. Paket 75 menit sudah termasuk sesi Mengaji privat.</div>
+  </div>
+
+  <!-- SD -->
+  <div class="price-panel" data-panel="sd">
+    <div class="price-card">
+      <div class="dur-label"><span class="dot"></span>Semua Mapel · 90 menit</div>
+      <table class="price-table">
+        <thead><tr><th>Paket</th><th class="num">Total Biaya</th></tr></thead>
+        <tbody id="tbl-sd-90"></tbody>
+      </table>
+    </div>
+    <div class="price-card">
+      <div class="dur-label"><span class="dot"></span>Semua Mapel + Mengaji · 100 menit</div>
+      <table class="price-table">
+        <thead><tr><th>Paket</th><th class="num">Total Biaya</th></tr></thead>
+        <tbody id="tbl-sd-100"></tbody>
+      </table>
+    </div>
+    <div class="price-note">📖 Paket 100 menit sudah termasuk sesi Mengaji privat. Ingin tambah KIT &amp; Games? Pilih add-on +KIT di bagian Tambahan Bonus (Rp 50.000/paket).</div>
+  </div>
+
+  <!-- SMP -->
+  <div class="price-panel" data-panel="smp">
+    <div class="price-card">
+      <div class="dur-label"><span class="dot"></span>Maks. 2 Mapel · 90 menit</div>
+      <table class="price-table">
+        <thead><tr><th>Paket</th><th class="num">Total Biaya</th></tr></thead>
+        <tbody id="tbl-smp-90"></tbody>
+      </table>
+    </div>
+    <div class="price-card">
+      <div class="dur-label"><span class="dot"></span>Maks. 2 Mapel + Mengaji · 100 menit</div>
+      <table class="price-table">
+        <thead><tr><th>Paket</th><th class="num">Total Biaya</th></tr></thead>
+        <tbody id="tbl-smp-100"></tbody>
+      </table>
+    </div>
+    <div class="price-note">📖 Paket 100 menit sudah termasuk sesi Mengaji privat tanpa biaya tambahan.</div>
+  </div>
+
+  <!-- PAKET SAUDARA -->
+  <div class="price-panel" data-panel="saudara">
+    <div class="price-note" style="margin-top:0">👫 Harga di bawah adalah <strong>total untuk 2 anak</strong> (sudah termasuk harga spesial Paket Saudara). Pilih kombinasi jenjang dan tipe program:</div>
+
+    <div class="sibling-select-wrap" style="margin-top:12px">
+      <label for="siblingPreview">Kombinasi jenjang</label>
+      <select id="siblingPreview" onchange="renderSiblingPreview()">
+        <option value="">Pilih kombinasi jenjang</option>
+        <option value="tk_sd">TK/PAUD + SD</option>
+        <option value="tk_smp">TK/PAUD + SMP</option>
+        <option value="sd_sd">SD + SD</option>
+        <option value="sd_smp">SD + SMP</option>
+      </select>
+    </div>
+
+    <div id="siblingPreviewWrap" style="display:none">
+      <div class="price-card">
+        <div class="dur-label"><span class="dot"></span>Tanpa Mengaji</div>
+        <table class="price-table">
+          <thead><tr><th>Paket</th><th class="num">Total Biaya</th></tr></thead>
+          <tbody id="tbl-sibling-tanpa"></tbody>
+        </table>
+      </div>
+      <div class="price-card">
+        <div class="dur-label"><span class="dot"></span>+ Mengaji (kedua anak)</div>
+        <table class="price-table">
+          <thead><tr><th>Paket</th><th class="num">Total Biaya</th></tr></thead>
+          <tbody id="tbl-sibling-mengaji"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="price-note" style="margin-bottom:12px">✨ Semua paket TK/PAUD sudah termasuk KIT &amp; Games edukatif. Untuk paket SD/SMP, add-on +KIT tersedia seharga Rp 50.000/paket — pilih di bagian Tambahan Bonus di bawah. Paket 75 menit (TK) dan 100 menit (SD/SMP) sudah termasuk sesi Mengaji privat tanpa biaya tambahan.</div>
+
+  <!-- CARA PEMBAYARAN -->
+  <div class="payment-info">
+    <div class="payment-title">💳 Cara Pembayaran</div>
+    <div class="payment-options">
+      <div class="payment-option">
+        <div class="payment-option-icon">✅</div>
+        <div class="payment-option-body">
+          <div class="payment-option-label">Bayar Lunas</div>
+          <div class="payment-option-desc">Pembayaran penuh dilakukan sebelum sesi pertama dimulai</div>
+        </div>
+      </div>
+      <div class="payment-option">
+        <div class="payment-option-icon">🔄</div>
+        <div class="payment-option-body">
+          <div class="payment-option-label">DP 50% + Pelunasan</div>
+          <div class="payment-option-desc">Bayar 50% di awal, sisa 50% dilunasi saat pertemuan telah mencapai <strong>50% dari paket yang dipilih</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM PILIHAN -->
+  <div class="form-card">
+    <div class="field" id="field-mode">
+      <label>Cara belajar <span class="req">*</span></label>
+      <div class="chip-grid" id="modeGrid">
+        <div class="chip compact" data-value="Privat (1-on-1)">
+          <div class="chip-radio-dot"></div>
+          <div class="chip-content"><div class="chip-title">👤 Privat (1-on-1)</div><div class="chip-sub">Fokus penuh satu anak satu guru</div></div>
+        </div>
+        <div class="chip compact" data-value="Paket Saudara">
+          <div class="chip-radio-dot"></div>
+          <div class="chip-content"><div class="chip-title">👫 Paket Saudara</div><div class="chip-sub">2 anak dalam satu keluarga, harga spesial lebih hemat</div></div>
+        </div>
+      </div>
+      <p class="error-msg">Pilih cara belajar</p>
+    </div>
+
+    <!-- Sibling extra (jenjang + no durasi) -->
+    <div id="saudaraExtra" style="display:none;margin-top:16px">
+      <div class="field" id="field-jenjangSaudara">
+        <label for="jenjangSaudara">Kombinasi jenjang Paket Saudara <span class="req">*</span></label>
+        <select id="jenjangSaudara" onchange="updateSaudaraDetail()">
+          <option value="">Pilih kombinasi jenjang</option>
+          <option value="tk_sd">TK/PAUD + SD</option>
+          <option value="tk_smp">TK/PAUD + SMP</option>
+          <option value="sd_sd">SD + SD</option>
+          <option value="sd_smp">SD + SMP</option>
+        </select>
+        <p class="help">Lihat tab "Paket Saudara" di tabel harga di atas untuk rincian biaya.</p>
+        <p class="error-msg">Pilih kombinasi jenjang</p>
+      </div>
+
+      <!-- Data Anak 1 (Kakak) -->
+      <div id="saudaraDetailWrap" style="display:none;margin-top:14px">
+        <div style="background:var(--cream-deep);border-radius:16px;padding:16px;margin-bottom:12px">
+          <p style="font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:12px">👦 Data Anak 1 (Kakak)</p>
+          <div class="field" id="field-namaKakak" style="margin-bottom:14px">
+            <label for="namaKakak">Nama lengkap Kakak <span class="req">*</span></label>
+            <input type="text" id="namaKakak" placeholder="Contoh: Ahmad Fariz">
+            <p class="error-msg">Nama kakak wajib diisi</p>
+          </div>
+          <div class="field" id="field-kelasKakak" style="margin-bottom:14px">
+            <label for="kelasKakak">Tingkat kelas Kakak <span class="req">*</span></label>
+            <input type="text" id="kelasKakak" placeholder="Contoh: TK B, 3 SD, 7 SMP">
+            <p class="error-msg">Kelas kakak wajib diisi</p>
+          </div>
+          <div class="field" id="field-mapelKakak" style="margin-bottom:0">
+            <label for="mapelKakak">Mapel / fokus belajar Kakak</label>
+            <input type="text" id="mapelKakak" placeholder="Contoh: Semua Mapel, Matematika &amp; IPA">
+          </div>
+        </div>
+
+        <!-- Data Anak 2 (Adik) -->
+        <div style="background:var(--cream-deep);border-radius:16px;padding:16px">
+          <p style="font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:12px">👧 Data Anak 2 (Adik)</p>
+          <div class="field" id="field-namaAdik" style="margin-bottom:14px">
+            <label for="namaAdik">Nama lengkap Adik <span class="req">*</span></label>
+            <input type="text" id="namaAdik" placeholder="Contoh: Siti Aisyah">
+            <p class="error-msg">Nama adik wajib diisi</p>
+          </div>
+          <div class="field" id="field-kelasAdik" style="margin-bottom:14px">
+            <label for="kelasAdik">Tingkat kelas Adik <span class="req">*</span></label>
+            <input type="text" id="kelasAdik" placeholder="Contoh: TK A, 1 SD, 8 SMP">
+            <p class="error-msg">Kelas adik wajib diisi</p>
+          </div>
+          <!-- Mapel adik — hanya muncul jika combo SD-SD atau SD-SMP -->
+          <div class="field" id="field-mapelAdik" style="margin-bottom:0;display:none">
+            <label for="mapelAdik">Mapel / fokus belajar Adik</label>
+            <input type="text" id="mapelAdik" placeholder="Contoh: Semua Mapel, Matematika &amp; B. Indonesia">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field" id="field-pertemuan" style="margin-top:18px">
+      <label>Jumlah pertemuan <span class="req">*</span></label>
+      <div class="chip-grid cols-2" id="pertemuanGrid">
+        <div class="chip compact" data-value="4x"><div class="chip-radio-dot"></div><div class="chip-content"><div class="chip-title">4x · Paket Penjelajah</div></div></div>
+        <div class="chip compact" data-value="8x"><div class="chip-radio-dot"></div><div class="chip-content"><div class="chip-title">8x · Paket Petualang</div></div></div>
+        <div class="chip compact" data-value="12x"><div class="chip-radio-dot"></div><div class="chip-content"><div class="chip-title">12x · Paket Juara</div></div></div>
+        <div class="chip compact" data-value="16x"><div class="chip-radio-dot"></div><div class="chip-content"><div class="chip-title">16x · Paket Jagoan</div></div></div>
+      </div>
+      <p class="error-msg">Pilih jumlah pertemuan</p>
+    </div>
+
+    <!-- Durasi (hanya tampil jika mode = Privat) -->
+    <div id="durasiWrap" style="margin-top:18px">
+      <div class="field" id="field-durasi">
+        <label>Durasi per sesi <span class="req">*</span></label>
+        <div class="chip-grid" id="durasiGrid">
+          <!-- diisi JS sesuai program -->
+        </div>
+        <p class="error-msg">Pilih durasi per sesi</p>
+      </div>
+    </div>
+
+    <!-- Tambahan bonus -->
+    <div class="field" style="margin-top:18px" id="field-bonus">
+      <label>Tambahan bonus (opsional)</label>
+      <div class="chip-grid" id="bonusGrid">
+        <div class="chip compact" data-value="+KIT &amp; Games edukatif (Rp 50.000/paket)">
+          <div class="chip-checkbox"></div>
+          <div class="chip-content">
+            <div class="chip-title">🎒 + KIT &amp; Games Edukatif</div>
+            <div class="chip-sub">Rp 50.000/paket · Alat tulis, name tag, lembar mewarnai, flashcard &amp; edu-games</div>
+          </div>
+        </div>
+        <div class="chip compact" data-value="+Mengaji untuk Paket Saudara" id="bonusMengajiSaudara" style="display:none">
+          <div class="chip-checkbox"></div>
+          <div class="chip-content">
+            <div class="chip-title">📖 + Mengaji (kedua anak)</div>
+            <div class="chip-sub">Pilih paket saudara versi +Mengaji untuk kedua anak</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-note">
+      💡 Tidak yakin paket mana yang cocok? Tidak masalah — admin akan membantu menyesuaikan setelah formulir ini terkirim via WhatsApp.
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">← Kembali</button>
+    <button type="button" class="btn btn-primary" onclick="nextStep()">Lanjut →</button>
+  </div>
+</div>
+
+<!-- ===== STEP 4: JADWAL ===== -->
+<div class="step" data-step="4">
+  <div class="step-eyebrow">Langkah 4</div>
+  <h2>Jadwal Les</h2>
+  <p class="lead">Pilih hari yang tersedia (boleh lebih dari satu sebagai alternatif).</p>
+  <div class="form-card">
+    <div class="field" id="field-hari">
+      <label>Hari les yang tersedia</label>
+      <div class="day-pills" id="dayPills">
+        <div class="day-pill" data-value="Senin">Senin</div>
+        <div class="day-pill" data-value="Selasa">Selasa</div>
+        <div class="day-pill" data-value="Rabu">Rabu</div>
+        <div class="day-pill" data-value="Kamis">Kamis</div>
+        <div class="day-pill" data-value="Jumat">Jumat</div>
+        <div class="day-pill" data-value="Sabtu">Sabtu</div>
+        <div class="day-pill" data-value="Minggu">Minggu</div>
+      </div>
+      <div class="info-note" style="margin-top:14px">
+        💡 <strong>Rekomendasi frekuensi belajar:</strong><br>
+        • TK/PAUD: 3x seminggu — rutin singkat lebih efektif untuk daya fokus anak<br>
+        • SD kelas 1–3: 2–3x seminggu<br>
+        • SD kelas 4–6: 2x seminggu<br>
+        • SMP: 2x seminggu, disesuaikan jadwal sekolah
+      </div>
+    </div>
+    <div class="field" style="margin-top:18px" id="field-jam">
+      <label for="jamLes">Jam les yang diinginkan</label>
+      <input type="text" id="jamLes" placeholder="Contoh: 16.00 – 17.30">
+      <p class="help">Waktu kerja guru kami pukul 07.00–19.00.</p>
+    </div>
+    <div class="field" style="margin-top:18px" id="field-tanggalMulai">
+      <label for="tanggalMulai">Rencana tanggal mulai les</label>
+      <input type="date" id="tanggalMulai">
+      <p class="help">Pendaftaran minggu ini, les bisa mulai minggu depan.</p>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">← Kembali</button>
+    <button type="button" class="btn btn-primary" onclick="nextStep()">Lanjut →</button>
+  </div>
+</div>
+
+<!-- ===== STEP 5: DATA ORANG TUA ===== -->
+<div class="step" data-step="5">
+  <div class="step-eyebrow">Langkah 5</div>
+  <h2>Data Orang Tua &amp; Alamat</h2>
+  <p class="lead">Agar guru bisa menemukan lokasi rumah dengan mudah.</p>
+  <div class="form-card">
+    <div class="field" id="field-ortu">
+      <label for="namaOrtu">Nama lengkap Ayah/Bunda <span class="req">*</span></label>
+      <input type="text" id="namaOrtu" placeholder="Boleh salah satu saja">
+      <p class="error-msg">Nama orang tua wajib diisi</p>
+    </div>
+    <div class="field" id="field-wa">
+      <label for="noWa">Nomor WhatsApp aktif <span class="req">*</span></label>
+      <input type="tel" id="noWa" placeholder="Contoh: 081234567890" inputmode="numeric">
+      <p class="error-msg">Masukkan nomor WhatsApp yang aktif</p>
+    </div>
+    <div class="field" id="field-alamat">
+      <label for="alamat">Alamat rumah lengkap <span class="req">*</span></label>
+      <textarea id="alamat" placeholder="Jalan, RT/RW, kelurahan, kecamatan"></textarea>
+      <p class="error-msg">Alamat rumah wajib diisi</p>
+    </div>
+    <div class="field" id="field-gmaps">
+      <label for="gmaps">Link Google Maps lokasi rumah</label>
+      <input type="url" id="gmaps" placeholder="Tempel link Google Maps di sini">
+      <p class="help">Buka Google Maps → cari rumah → tap "Bagikan" → salin link.</p>
+    </div>
+    <div class="field" id="field-patokan">
+      <label for="patokan">Patokan lokasi</label>
+      <textarea id="patokan" placeholder="Contoh: rumah cat hijau sebelah warung Bu Siti, gang dari Indomaret"></textarea>
+    </div>
+    <div class="field" id="field-area">
+      <label for="area">Area rumah</label>
+      <select id="area">
+        <option value="">Pilih area</option>
+        <option>Samarinda Ulu</option><option>Samarinda Ilir</option>
+        <option>Samarinda Utara</option><option>Samarinda Seberang</option>
+        <option>Loa Janan</option><option>Lainnya</option>
+      </select>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">← Kembali</button>
+    <button type="button" class="btn btn-primary" onclick="nextStep()">Lanjut →</button>
+  </div>
+</div>
+
+<!-- ===== STEP 6: KONSULTASI ===== -->
+<div class="step" data-step="6">
+  <div class="step-eyebrow">Langkah 6</div>
+  <h2>Konsultasi Hari Pertama</h2>
+  <p class="lead">Informasi penting sebelum les pertama dimulai.</p>
+  <div class="form-card">
+    <div class="info-note" style="margin-top:0">
+      🤝 <strong>Sesi konsultasi gratis di hari pertama.</strong><br><br>
+      Pada pertemuan pertama, guru akan datang sedikit lebih awal untuk konsultasi singkat bersama Ayah/Bunda — saling mengenal, membahas karakter anak, dan menyepakati target belajar.<br><br>
+      Mohon luangkan waktu sekitar 10–15 menit di awal sesi pertama.
+    </div>
+    <div class="field" id="field-konfirmasiKonsultasi" style="margin-top:18px">
+      <div class="chip-grid" id="konsultasiGrid">
+        <div class="chip compact" data-value="Bersedia hadir konsultasi hari pertama">
+          <div class="chip-checkbox"></div>
+          <div class="chip-content"><div class="chip-title">Baik, saya akan meluangkan waktu untuk konsultasi di hari pertama</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">← Kembali</button>
+    <button type="button" class="btn btn-primary" onclick="nextStep()">Lanjut →</button>
+  </div>
+</div>
+
+<!-- ===== STEP 7: PERATURAN + CATATAN ===== -->
+<div class="step" data-step="7">
+  <div class="step-eyebrow">Langkah 7</div>
+  <h2>Peraturan &amp; Ketentuan</h2>
+  <p class="lead">Mohon dibaca dan dipahami sebelum mengirim pendaftaran.</p>
+  <div class="form-card">
+    <div class="rules-list">
+      <div class="rule-item">
+        <span class="rule-icon">⏰</span>
+        <div class="rule-text"><strong>Izin tidak les</strong><br>Pemberitahuan izin wajib disampaikan maksimal <strong>3 jam sebelum jadwal les</strong>. Jika kurang dari 3 jam, pertemuan tetap dihitung dan dikenakan <strong>50% biaya satu sesi</strong>.</div>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">💳</span>
+        <div class="rule-text"><strong>Tidak ada pengembalian dana</strong><br>Apabila les dihentikan secara tiba-tiba di tengah paket yang berjalan, biaya yang sudah dibayar <strong>tidak dapat dikembalikan (no refund)</strong>.</div>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">📅</span>
+        <div class="rule-text"><strong>Reschedule jadwal</strong><br>Perubahan jadwal dapat dilakukan maksimal <strong>3x dalam satu paket pertemuan</strong>, dengan pemberitahuan minimal 1 hari sebelumnya dan menyesuaikan ketersediaan guru.</div>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">🌧️</span>
+        <div class="rule-text"><strong>Kendala cuaca</strong><br>Jika terjadi hujan deras atau banjir yang menghalangi perjalanan guru, jadwal les akan di-reschedule sesuai kesepakatan guru dan orang tua tanpa dikenakan biaya pembatalan.</div>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">🏠</span>
+        <div class="rule-text"><strong>Kehadiran saat guru datang</strong><br>Mohon pastikan anak dan rumah siap pada jam yang disepakati. Jika guru sudah datang sesuai jadwal namun rumah kosong/anak tidak ada, sesi tetap dihitung penuh.</div>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">⏳</span>
+        <div class="rule-text"><strong>Masa berlaku paket</strong><br>Paket berlaku maksimal <strong>2 bulan</strong> sejak sesi pertama. Pertemuan yang belum terpakai setelah masa berlaku akan hangus.</div>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">🚫</span>
+        <div class="rule-text"><strong>Komitmen dengan KidsHome</strong><br>Untuk menjaga kepercayaan bersama, kami mohon agar tidak melakukan permintaan mengajar kepada guru secara pribadi di luar sepengetahuan dan persetujuan KidsHome.</div>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">🤝</span>
+        <div class="rule-text"><strong>Komunikasi resmi</strong><br>Segala komunikasi terkait jadwal, izin, atau keluhan mohon disampaikan melalui WhatsApp admin KidsHome — bukan langsung ke guru — agar tercatat dengan baik.</div>
+      </div>
+    </div>
+
+    <div class="field" id="field-setujuPeraturan" style="margin-top:18px">
+      <div class="chip-grid" id="peraturanGrid">
+        <div class="chip compact" data-value="Menyetujui peraturan dan ketentuan KidsHome">
+          <div class="chip-checkbox"></div>
+          <div class="chip-content"><div class="chip-title">Saya sudah membaca dan menyetujui peraturan di atas</div></div>
+        </div>
+      </div>
+      <p class="error-msg">Mohon menyetujui peraturan sebelum melanjutkan</p>
+    </div>
+  </div>
+
+  <div class="form-card" style="margin-top:16px">
+    <h2 style="font-size:18px;margin-bottom:4px">Catatan Tambahan</h2>
+    <p class="lead" style="margin-bottom:16px">Bantu kami mengenal anak lebih baik (opsional, sangat membantu guru).</p>
+    <div class="field" id="field-karakter">
+      <label for="karakter">Karakter &amp; perkembangan belajar anak</label>
+      <textarea id="karakter" placeholder="Contoh: anaknya aktif dan ceria, belum mengenal huruf, menulis masih kurang rapi"></textarea>
+    </div>
+    <div class="field" id="field-permintaan">
+      <label for="permintaan">Permintaan khusus untuk guru (opsional)</label>
+      <textarea id="permintaan" placeholder="Contoh: mohon guru perempuan, atau metode belajar santai"></textarea>
+    </div>
+    <div class="field" id="field-sumber">
+      <label for="sumber">Tahu info KidsHome dari mana?</label>
+      <select id="sumber">
+        <option value="">Pilih salah satu</option>
+        <option>Rekomendasi Teman/Kerabat/Tetangga</option>
+        <option>Instagram</option><option>Facebook</option>
+        <option>Grup WhatsApp</option><option>Lainnya</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">← Kembali</button>
+    <button type="button" class="btn btn-primary" onclick="nextStep()">Lanjut →</button>
+  </div>
+</div>
+
+<!-- ===== STEP 8: PROMO JULI ===== -->
+<div class="step" data-step="8">
+  <div class="step-eyebrow">Langkah 8 — Terakhir</div>
+  <h2>Info Promo Bulan Ini 🎉</h2>
+  <p class="lead">Sebelum kirim, yuk intip promo spesial bulan Juli!</p>
+  <div class="promo-poster">
+    <div class="promo-badge">PROMO JULI 2026</div>
+    <h3 class="promo-title">Yuk, Persiapkan Anak Sejak Sekarang! 🌟</h3>
+    <p class="promo-sub">Dua kelas spesial bulan ini — kuota terbatas!</p>
+    <div class="promo-card">
+      <div class="promo-card-icon">🎒</div>
+      <div>
+        <div class="promo-card-title">Kelas Pemantapan Masuk SD</div>
+        <div class="promo-card-desc">Khusus anak usia 6–7 tahun · Persiapan calistung &amp; adaptasi sebelum SD</div>
+        <div class="promo-price-row">
+          <span class="promo-price-old">Rp 300.000</span>
+          <span class="promo-price-new">Rp 200.000</span>
+          <span class="promo-price-unit">/4 sesi</span>
+        </div>
+      </div>
+    </div>
+    <div class="promo-card">
+      <div class="promo-card-icon">🧮</div>
+      <div>
+        <div class="promo-card-title">Pemantapan Matematika SD</div>
+        <div class="promo-card-desc">Untuk siswa SD kelas 1–6 · Perkuat dasar matematika di rumah bersama guru privat</div>
+        <div class="promo-price-row">
+          <span class="promo-price-old">Rp 400.000</span>
+          <span class="promo-price-new">Rp 300.000</span>
+          <span class="promo-price-unit">/4 sesi</span>
+        </div>
+      </div>
+    </div>
+    <p class="promo-footer-note">📲 Tertarik? Sebutkan saja di formulir atau langsung chat admin via WhatsApp.</p>
+  </div>
+  <div class="btn-row">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">← Kembali</button>
+    <button type="submit" class="btn btn-primary">Kirim Pendaftaran ✓</button>
+  </div>
+</div>
+
+</form>
+
+<!-- DONE STATE -->
+<div class="done-card" id="doneCard">
+  <div class="done-emoji">🎉</div>
+  <h2>Data siap dikirim!</h2>
+  <p>Ringkasan pendaftaran sudah kami susun. Klik tombol di bawah untuk mengirim ke admin via WhatsApp.</p>
+  <div class="form-card" style="text-align:left;margin-bottom:20px" id="reviewBody"></div>
+  <a href="#" target="_blank" class="wa-btn" id="waLink">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-1.746-.872-2.892-1.554-4.044-3.522-.305-.524.305-.486.873-1.62.099-.195.05-.367-.05-.516-.099-.149-.673-1.62-.922-2.168-.249-.534-.494-.462-.673-.462-.176 0-.371-.022-.57-.022-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.064 2.875 1.213 3.074.149.198 2.04 3.124 4.946 4.26 2.906 1.136 2.906.756 3.428.706.521-.05 1.766-.72 2.015-1.413.248-.694.248-1.289.173-1.413-.074-.124-.273-.198-.574-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5.003L2 22l5.094-1.318A9.953 9.953 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.165a8.118 8.118 0 0 1-4.142-1.133l-.297-.177-3.06.792.818-2.982-.194-.306A8.118 8.118 0 0 1 3.835 12C3.835 7.486 7.486 3.835 12 3.835c4.514 0 8.165 3.651 8.165 8.165 0 4.514-3.651 8.165-8.165 8.165z"/></svg>
+    Kirim ke Admin via WhatsApp
+  </a>
+  <span style="display:block;text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px;cursor:pointer;text-decoration:underline" onclick="editData()">Ubah data dulu</span>
+</div>
+</div>
+
+<footer>
+  <div class="fname">KidsHome Samarinda</div>
+  <p>Les privat datang ke rumah — TK/PAUD, SD, SMP</p>
+  <p style="margin-top:6px">@kidshome.samarinda</p>
+</footer>
+
+<script>
+const ADMIN_WA_NUMBER = "6282344654705";
+const TOTAL_STEPS = 8;
+let currentStep = 1;
+
+const stepLabels = {
+  1:"Data Anak", 2:"Program Bimbel", 3:"Paket & Durasi",
+  4:"Jadwal", 5:"Data Orang Tua", 6:"Konsultasi Awal",
+  7:"Peraturan", 8:"Info Promo"
+};
+
+// ===== PRICE DATA FROM EXCEL =====
+const prices = {
+  tk: {
+    60:  [{count:4,total:320000},{count:8,total:600000,popular:true},{count:12,total:840000},{count:16,total:1120000}],
+    75:  [{count:4,total:360000},{count:8,total:680000,popular:true},{count:12,total:960000},{count:16,total:1280000}],
+  },
+  sd: {
+    90:  [{count:4,total:240000},{count:8,total:440000,popular:true},{count:12,total:600000},{count:16,total:800000}],
+    100: [{count:4,total:300000},{count:8,total:560000,popular:true},{count:12,total:780000},{count:16,total:1040000}],
+  },
+  smp: {
+    90:  [{count:4,total:280000},{count:8,total:520000,popular:true},{count:12,total:720000},{count:16,total:960000}],
+    100: [{count:4,total:340000},{count:8,total:640000,popular:true},{count:12,total:900000},{count:16,total:1200000}],
+  },
+};
+
+// ===== PAKET SAUDARA — harga hardcoded (dibulatkan, sudah termasuk harga spesial Paket Saudara) =====
+// Pembulatan: ceil ke kelipatan 5.000 terdekat (misal 432rb→435rb, 1188rb→1190rb, 1584rb→1585rb)
+const siblingTanpa = {
+  tk_sd:  [{count:4,total:505000},{count:8,total:940000,popular:true},{count:12,total:1300000},{count:16,total:1730000}],
+  tk_smp: [{count:4,total:540000},{count:8,total:1010000,popular:true},{count:12,total:1405000},{count:16,total:1875000}],
+  sd_sd:  [{count:4,total:435000},{count:8,total:795000,popular:true},{count:12,total:1080000},{count:16,total:1440000}],
+  sd_smp: [{count:4,total:470000},{count:8,total:865000,popular:true},{count:12,total:1190000},{count:16,total:1585000}],
+};
+const siblingMengaji = {
+  tk_sd:  [{count:4,total:595000},{count:8,total:1120000,popular:true},{count:12,total:1570000},{count:16,total:2090000}],
+  tk_smp: [{count:4,total:630000},{count:8,total:1190000,popular:true},{count:12,total:1675000},{count:16,total:2235000}],
+  sd_sd:  [{count:4,total:540000},{count:8,total:1010000,popular:true},{count:12,total:1405000},{count:16,total:1875000}],
+  sd_smp: [{count:4,total:580000},{count:8,total:1080000,popular:true},{count:12,total:1515000},{count:16,total:2020000}],
+};
+
+function renderSiblingPreview(){
+  const val = document.getElementById('siblingPreview').value;
+  const wrap = document.getElementById('siblingPreviewWrap');
+  if(!val){ wrap.style.display='none'; return; }
+  wrap.style.display='block';
+  renderTable('tbl-sibling-tanpa', siblingTanpa[val]);
+  renderTable('tbl-sibling-mengaji', siblingMengaji[val]);
+}
+
+const paketNames = {4:'4x · Penjelajah', 8:'8x · Petualang', 12:'12x · Juara', 16:'16x · Jagoan'};
+function formatRp(n){ return 'Rp '+n.toLocaleString('id-ID'); }
+function renderTable(tbodyId, rows){
+  const el = document.getElementById(tbodyId);
+  if(!el) return;
+  el.innerHTML = rows.map(r=>`
+    <tr class="${r.popular?'popular':''}">
+      <td class="pertemuan">${paketNames[r.count]||r.count+'x'}</td>
+      <td class="num">${formatRp(r.total)}</td>
+    </tr>`).join('');
+}
+function renderAllTables(){
+  renderTable('tbl-tk-60', prices.tk[60]);
+  renderTable('tbl-tk-75', prices.tk[75]);
+  renderTable('tbl-sd-90', prices.sd[90]);
+  renderTable('tbl-sd-100', prices.sd[100]);
+  renderTable('tbl-smp-90', prices.smp[90]);
+  renderTable('tbl-smp-100', prices.smp[100]);
+}
+
+function setLevel(level, tab){
+  document.querySelectorAll('.level-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.price-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.price-panel[data-panel="${level}"]`).classList.add('active');
+}
+
+// Durasi options per program
+const durasiOptions = {
+  'TK/PAUD (Calistung)': [
+    {val:'60 menit (Calistung saja)', label:'60 menit · Calistung saja'},
+    {val:'75 menit (Calistung + Mengaji)', label:'75 menit · Calistung + Mengaji'},
+  ],
+  'SD Kelas 1-6': [
+    {val:'90 menit (Semua Mapel)', label:'90 menit · Semua Mapel'},
+    {val:'100 menit (Semua Mapel + Mengaji)', label:'100 menit · Semua Mapel + Mengaji'},
+  ],
+  'SMP Kelas 7-9': [
+    {val:'90 menit (Maks. 2 Mapel)', label:'90 menit · Maks. 2 Mapel'},
+    {val:'100 menit (Maks. 2 Mapel + Mengaji)', label:'100 menit · Maks. 2 Mapel + Mengaji'},
+  ],
+};
+
+function updateDurasiOptions(){
+  const prog = selections.program;
+  const isSaudara = selections.mode === 'Paket Saudara';
+  const wrap = document.getElementById('durasiWrap');
+  const grid = document.getElementById('durasiGrid');
+
+  if(isSaudara){
+    wrap.style.display = 'none';
+    selections.durasi = '';
+    return;
+  }
+  wrap.style.display = 'block';
+  const opts = durasiOptions[prog] || [];
+  grid.innerHTML = opts.map(o=>`
+    <div class="chip compact" data-value="${o.val}">
+      <div class="chip-radio-dot"></div>
+      <div class="chip-content"><div class="chip-title">${o.label}</div></div>
+    </div>`).join('');
+  selections.durasi = '';
+  grid.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      grid.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      selections.durasi = chip.dataset.value;
+      document.getElementById('field-durasi').classList.remove('has-error');
+    });
+  });
+}
+
+// ===== STATE =====
+const selections = {jk:'', program:'', mode:'', pertemuan:'', durasi:'', bonus:'', konsultasi:'', peraturan:''};
+const selectedDays = [];
+
+function updateProgress(){
+  const pct = (currentStep/TOTAL_STEPS)*100;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = `Langkah ${currentStep} dari ${TOTAL_STEPS}`;
+  document.getElementById('progressPct').textContent = stepLabels[currentStep];
+}
+
+function showStep(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+  currentStep = n;
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function clearStepErrors(stepEl){
+  stepEl.querySelectorAll('.field').forEach(f=>f.classList.remove('has-error'));
+}
+
+function validateStep(n){
+  const stepEl = document.querySelector(`.step[data-step="${n}"]`);
+  clearStepErrors(stepEl);
+  let valid = true, firstError = null;
+  function flag(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.add('has-error');
+    if(!firstError) firstError = el;
+    valid = false;
+  }
+  if(n===1){
+    if(!document.getElementById('nama').value.trim()) flag('field-nama');
+    if(!selections.jk) flag('field-jk');
+    if(!document.getElementById('usia').value.trim()) flag('field-usia');
+    if(!document.getElementById('jenjang').value) flag('field-jenjang');
+  }
+  if(n===2){ if(!selections.program) flag('field-program'); }
+  if(n===3){
+    if(!selections.mode) flag('field-mode');
+    if(selections.mode==='Paket Saudara'){
+      if(!document.getElementById('jenjangSaudara').value) flag('field-jenjangSaudara');
+      if(document.getElementById('saudaraDetailWrap').style.display!=='none'){
+        if(!document.getElementById('namaKakak').value.trim()) flag('field-namaKakak');
+        if(!document.getElementById('kelasKakak').value.trim()) flag('field-kelasKakak');
+        if(!document.getElementById('namaAdik').value.trim()) flag('field-namaAdik');
+        if(!document.getElementById('kelasAdik').value.trim()) flag('field-kelasAdik');
+      }
+    }
+    if(!selections.pertemuan) flag('field-pertemuan');
+    if(selections.mode!=='Paket Saudara' && !selections.durasi) flag('field-durasi');
+  }
+  if(n===5){
+    if(!document.getElementById('namaOrtu').value.trim()) flag('field-ortu');
+    const wa = document.getElementById('noWa').value.trim();
+    if(!wa || wa.replace(/\D/g,'').length < 9) flag('field-wa');
+    if(!document.getElementById('alamat').value.trim()) flag('field-alamat');
+  }
+  if(n===7){ if(!selections.peraturan) flag('field-setujuPeraturan'); }
+  if(firstError) firstError.scrollIntoView({behavior:'smooth',block:'center'});
+  return valid;
+}
+
+function nextStep(){
+  if(!validateStep(currentStep)) return;
+  if(currentStep < TOTAL_STEPS) showStep(currentStep+1);
+}
+function prevStep(){
+  if(currentStep > 1) showStep(currentStep-1);
+}
+
+function setupRadioGroup(gridId, key){
+  const grid = document.getElementById(gridId);
+  if(!grid) return;
+  grid.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      grid.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      selections[key] = chip.dataset.value;
+      const fw = grid.closest('.field');
+      if(fw) fw.classList.remove('has-error');
+      if(gridId==='programGrid'){ updateDurasiOptions(); }
+      if(gridId==='modeGrid'){
+        const isSaudara = selections.mode==='Paket Saudara';
+        document.getElementById('saudaraExtra').style.display = isSaudara?'block':'none';
+        document.getElementById('bonusMengajiSaudara').style.display = isSaudara?'flex':'none';
+        // Reset detail wrap when switching away from saudara
+        if(!isSaudara){
+          document.getElementById('saudaraDetailWrap').style.display='none';
+          document.getElementById('jenjangSaudara').value='';
+        }
+        updateDurasiOptions();
+      }
+    });
+  });
+}
+
+// Show/hide nama+kelas+mapel fields based on chosen sibling combo
+function updateSaudaraDetail(){
+  const val = document.getElementById('jenjangSaudara').value;
+  const wrap = document.getElementById('saudaraDetailWrap');
+  const mapelAdikField = document.getElementById('field-mapelAdik');
+  const mapelKakakField = document.getElementById('field-mapelKakak');
+
+  if(!val){ wrap.style.display='none'; return; }
+  wrap.style.display='block';
+
+  // mapel kakak: show for all (TK can leave blank, SD/SMP fill in)
+  // mapel kakak placeholder adjust
+  const kakakPlaceholders = {
+    tk_sd:'TK/PAUD — boleh dikosongkan (Calistung)',
+    tk_smp:'TK/PAUD — boleh dikosongkan (Calistung)',
+    sd_sd:'Contoh: Matematika &amp; IPA',
+    sd_smp:'Contoh: Matematika &amp; B. Indonesia',
+  };
+  document.getElementById('mapelKakak').placeholder = kakakPlaceholders[val] || 'Mapel yang ingin dipelajari';
+
+  // mapel adik: only show if combo includes SD or SMP on adik side
+  const showMapelAdik = (val==='sd_sd' || val==='sd_smp' || val==='tk_smp');
+  mapelAdikField.style.display = showMapelAdik ? 'block' : 'none';
+
+  const adikPlaceholders = {
+    tk_sd:'TK/PAUD — boleh dikosongkan (Calistung)',
+    tk_smp:'TK/PAUD — boleh dikosongkan (Calistung)',
+    sd_sd:'Contoh: Semua Mapel / Matematika',
+    sd_smp:'Contoh: 2 mapel pilihan SMP',
+  };
+  document.getElementById('mapelAdik').placeholder = adikPlaceholders[val] || '';
+
+  // kelas kakak/adik placeholder
+  const kakakKelas = {tk_sd:'Contoh: TK B',tk_smp:'Contoh: TK A',sd_sd:'Contoh: 3 SD',sd_smp:'Contoh: 5 SD'};
+  const adikKelas  = {tk_sd:'Contoh: 1 SD',tk_smp:'Contoh: 7 SMP',sd_sd:'Contoh: 1 SD',sd_smp:'Contoh: 8 SMP'};
+  document.getElementById('kelasKakak').placeholder = kakakKelas[val] || '';
+  document.getElementById('kelasAdik').placeholder  = adikKelas[val]  || '';
+}
+
+function setupCheckGroup(gridId, key){
+  const grid = document.getElementById(gridId);
+  if(!grid) return;
+  grid.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      chip.classList.toggle('active');
+      selections[key] = chip.classList.contains('active') ? chip.dataset.value : '';
+    });
+  });
+}
+
+setupRadioGroup('jkGrid','jk');
+setupRadioGroup('programGrid','program');
+setupRadioGroup('modeGrid','mode');
+setupRadioGroup('pertemuanGrid','pertemuan');
+setupCheckGroup('konsultasiGrid','konsultasi');
+setupCheckGroup('peraturanGrid','peraturan');
+
+// Bonus grid (multi-checkbox)
+document.getElementById('bonusGrid').querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    chip.classList.toggle('active');
+    const selected = [...document.getElementById('bonusGrid').querySelectorAll('.chip.active')]
+      .map(c=>c.dataset.value).join(', ');
+    selections.bonus = selected;
+  });
+});
+
+// Day pills
+document.querySelectorAll('.day-pill').forEach(pill=>{
+  pill.addEventListener('click',()=>{
+    pill.classList.toggle('active');
+    const v = pill.dataset.value;
+    const idx = selectedDays.indexOf(v);
+    if(pill.classList.contains('active') && idx===-1) selectedDays.push(v);
+    if(!pill.classList.contains('active') && idx!==-1) selectedDays.splice(idx,1);
+  });
+});
+
+// Clear errors on input
+['nama','usia','namaOrtu','noWa','alamat'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('input',()=>{ const w=el.closest('.field'); if(w) w.classList.remove('has-error'); });
+});
+
+// Submit
+document.getElementById('regForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if(!selections.peraturan){ showStep(7); validateStep(7); return; }
+
+  const d = {
+    nama: document.getElementById('nama').value.trim(),
+    jk: selections.jk,
+    usia: document.getElementById('usia').value.trim(),
+    jenjang: document.getElementById('jenjang').value,
+    sekolah: document.getElementById('sekolah').value.trim() || '-',
+    program: selections.program,
+    mapel: document.getElementById('mapel').value.trim() || '-',
+    mode: selections.mode,
+    jenjangSaudara: document.getElementById('jenjangSaudara').value || '-',
+    namaKakak: document.getElementById('namaKakak').value.trim() || '-',
+    kelasKakak: document.getElementById('kelasKakak').value.trim() || '-',
+    mapelKakak: document.getElementById('mapelKakak').value.trim() || '-',
+    namaAdik: document.getElementById('namaAdik').value.trim() || '-',
+    kelasAdik: document.getElementById('kelasAdik').value.trim() || '-',
+    mapelAdik: document.getElementById('mapelAdik').value.trim() || '-',
+    pertemuan: selections.pertemuan,
+    durasi: selections.durasi || '(Paket Saudara - durasi sesuai jenjang)',
+    bonus: selections.bonus || '-',
+    hari: selectedDays.join(', ') || '-',
+    jam: document.getElementById('jamLes').value.trim() || '-',
+    tanggalMulai: document.getElementById('tanggalMulai').value || '-',
+    namaOrtu: document.getElementById('namaOrtu').value.trim(),
+    noWa: document.getElementById('noWa').value.trim(),
+    alamat: document.getElementById('alamat').value.trim(),
+    gmaps: document.getElementById('gmaps').value.trim() || '-',
+    patokan: document.getElementById('patokan').value.trim() || '-',
+    area: document.getElementById('area').value || '-',
+    konsultasi: selections.konsultasi ? 'Bersedia hadir konsultasi hari pertama' : 'Belum konfirmasi',
+    peraturan: 'Menyetujui peraturan & ketentuan KidsHome',
+    karakter: document.getElementById('karakter').value.trim() || '-',
+    permintaan: document.getElementById('permintaan').value.trim() || '-',
+    sumber: document.getElementById('sumber').value || '-',
+  };
+
+  document.getElementById('reviewBody').innerHTML = `
+    <div class="review-section">
+      <h4>Data Anak</h4>
+      <div class="review-row"><span class="k">Nama</span><span class="v">${d.nama}</span></div>
+      <div class="review-row"><span class="k">Jenis kelamin</span><span class="v">${d.jk}</span></div>
+      <div class="review-row"><span class="k">Usia</span><span class="v">${d.usia}</span></div>
+      <div class="review-row"><span class="k">Jenjang</span><span class="v">${d.jenjang}</span></div>
+    </div>
+    <div class="review-section">
+      <h4>Program & Paket</h4>
+      <div class="review-row"><span class="k">Program</span><span class="v">${d.program}</span></div>
+      <div class="review-row"><span class="k">Cara belajar</span><span class="v">${d.mode}</span></div>
+      <div class="review-row"><span class="k">Pertemuan</span><span class="v">${d.pertemuan}</span></div>
+      <div class="review-row"><span class="k">Durasi</span><span class="v">${d.durasi}</span></div>
+    </div>
+    <div class="review-section">
+      <h4>Kontak</h4>
+      <div class="review-row"><span class="k">Orang tua</span><span class="v">${d.namaOrtu}</span></div>
+      <div class="review-row"><span class="k">WhatsApp</span><span class="v">${d.noWa}</span></div>
+    </div>`;
+
+  const msg = [
+    "Halo KidsHome Samarinda, saya ingin mendaftarkan anak saya:",
+    "",
+    "*DATA ANAK*",
+    "Nama: "+d.nama, "Jenis kelamin: "+d.jk, "Usia: "+d.usia,
+    "Jenjang/kelas: "+d.jenjang, "Asal sekolah: "+d.sekolah,
+    "",
+    "*PROGRAM & PAKET*",
+    "Program: "+d.program, "Mapel: "+d.mapel,
+    "Cara belajar: "+d.mode,
+    d.mode==='Paket Saudara' ? "Kombinasi jenjang: "+d.jenjangSaudara : null,
+    d.mode==='Paket Saudara' ? "Anak 1 (Kakak): "+d.namaKakak+" | Kelas: "+d.kelasKakak+" | Mapel: "+d.mapelKakak : null,
+    d.mode==='Paket Saudara' ? "Anak 2 (Adik): "+d.namaAdik+" | Kelas: "+d.kelasAdik+" | Mapel: "+d.mapelAdik : null,
+    "Jumlah pertemuan: "+d.pertemuan,
+    "Durasi per sesi: "+d.durasi,
+    "Tambahan bonus: "+d.bonus,
+    "",
+    "*JADWAL*",
+    "Hari tersedia: "+d.hari, "Jam: "+d.jam, "Rencana mulai: "+d.tanggalMulai,
+    "",
+    "*ORANG TUA & ALAMAT*",
+    "Nama: "+d.namaOrtu, "No. WA: "+d.noWa,
+    "Alamat: "+d.alamat, "Link Maps: "+d.gmaps,
+    "Patokan: "+d.patokan, "Area: "+d.area,
+    "",
+    "*KONSULTASI*", d.konsultasi,
+    "",
+    "*PERATURAN*", d.peraturan,
+    "",
+    "*CATATAN*",
+    "Karakter anak: "+d.karakter,
+    "Permintaan khusus: "+d.permintaan,
+    "Tahu info dari: "+d.sumber,
+  ].filter(l=>l!==null).join("\n");
+
+  document.getElementById('waLink').href = "https://wa.me/"+ADMIN_WA_NUMBER+"?text="+encodeURIComponent(msg);
+  document.querySelectorAll('.step').forEach(s=>s.style.display='none');
+  document.querySelector('.progress-wrap').style.display='none';
+  document.getElementById('doneCard').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+function editData(){
+  document.getElementById('doneCard').classList.remove('show');
+  document.querySelector('.progress-wrap').style.display='block';
+  document.querySelectorAll('.step').forEach(s=>s.style.display='');
+  showStep(1);
+}
+
+renderAllTables();
+updateProgress();
+</script>
+</body>
+</html>
