@@ -193,4 +193,166 @@ section{
     color:#666;
     font-size:18px;
 }
+/* ================= PROGRAM ================= */
 
+.program{
+    background:#f7faf9;
+}
+
+.program-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.card{
+    background:#fff;
+    padding:40px 30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.card i{
+    font-size:55px;
+    color:#1b8c5a;
+    margin-bottom:20px;
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#222;
+}
+
+.card p{
+    color:#666;
+    white-space:pre-line;
+}
+
+/* ================= PROMO ================= */
+
+.promo{
+    background:#1b8c5a;
+    color:#fff;
+}
+
+.promo .title{
+    color:#fff;
+}
+
+.promo-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:50px;
+}
+
+.promo-text h3{
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.promo-text p{
+    margin-bottom:20px;
+}
+
+.promo-text ul{
+    margin-bottom:30px;
+    padding-left:20px;
+}
+
+.promo-text li{
+    margin-bottom:12px;
+}
+
+.promo-image img{
+    width:80%;
+    margin:auto;
+}
+
+/* ================= WHY ================= */
+
+.why{
+    background:#ffffff;
+}
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.why-card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.why-card:hover{
+    transform:translateY(-8px);
+}
+
+.why-card i{
+    font-size:45px;
+    color:#1b8c5a;
+    margin-bottom:18px;
+}
+
+.why-card h3{
+    margin-bottom:15px;
+}
+
+/* ================= TESTIMONI ================= */
+
+.testimoni{
+    background:#f7faf9;
+}
+
+.testimoni-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.testimoni-card{
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.testimoni-card h4{
+    margin-top:20px;
+    color:#1b8c5a;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    background:linear-gradient(90deg,#1b8c5a,#2eb872);
+    color:#fff;
+    text-align:center;
+}
+
+.cta h2{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.cta p{
+    margin-bottom:30px;
+}
+
+.cta .btn{
+    background:#fff;
+    color:#1b8c5a;
+}
