@@ -356,3 +356,264 @@ section{
     background:#fff;
     color:#1b8c5a;
 }
+/* ================= CONTACT ================= */
+
+.contact{
+    background:#ffffff;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.contact-card{
+    background:#fff;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.contact-card:hover{
+    transform:translateY(-8px);
+}
+
+.contact-card i{
+    font-size:48px;
+    color:#1b8c5a;
+    margin-bottom:18px;
+}
+
+.contact-card h3{
+    margin-bottom:15px;
+}
+
+.contact-card p{
+    color:#666;
+}
+
+/* ================= MAP ================= */
+
+.maps iframe{
+    width:100%;
+    height:450px;
+    border:0;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#16593d;
+    color:#ffffff;
+    padding:60px 0 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-logo{
+    width:120px;
+    margin-bottom:20px;
+}
+
+footer h3{
+    margin-bottom:20px;
+}
+
+footer ul{
+    list-style:none;
+}
+
+footer ul li{
+    margin-bottom:12px;
+}
+
+footer hr{
+    border:none;
+    height:1px;
+    background:rgba(255,255,255,.2);
+    margin:40px 0 20px;
+}
+
+.copyright{
+    text-align:center;
+    font-size:14px;
+}
+
+/* ================= FLOATING WA ================= */
+
+.floating-wa{
+
+position:fixed;
+
+right:25px;
+
+bottom:25px;
+
+width:65px;
+
+height:65px;
+
+background:#25D366;
+
+color:white;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:34px;
+
+text-decoration:none;
+
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+transition:.3s;
+
+z-index:999;
+
+}
+
+.floating-wa:hover{
+
+transform:scale(1.1);
+
+}
+
+/* ================= HOVER ================= */
+
+.card,
+.contact-card,
+.why-card,
+.testimoni-card{
+
+transition:all .35s ease;
+
+}
+
+.card:hover,
+.contact-card:hover,
+.why-card:hover,
+.testimoni-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:992px){
+
+.hero-grid,
+.promo-box,
+.footer-grid{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+.program-grid,
+.why-grid,
+.testimoni-grid,
+.contact-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+.hero-image img{
+
+width:70%;
+
+margin:auto;
+
+}
+
+.counter{
+
+justify-content:center;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.menu{
+
+display:none;
+
+}
+
+.btn{
+
+display:inline-block;
+
+}
+
+.hero{
+
+padding-top:130px;
+
+}
+
+.program-grid,
+.why-grid,
+.testimoni-grid,
+.contact-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.title{
+
+font-size:30px;
+
+}
+
+.counter{
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.logo img{
+
+height:55px;
+
+}
+
+.maps iframe{
+
+height:320px;
+
+}
+
+}
