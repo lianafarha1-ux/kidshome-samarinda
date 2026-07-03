@@ -1,1 +1,196 @@
-/* KidsHome Samarinda */
+/* ======================================
+   KIDSHOME SAMARINDA
+   STYLE.CSS
+====================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f8fbfb;
+    color:#333;
+    line-height:1.7;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#ffffff;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    z-index:999;
+}
+
+.nav-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+}
+
+.logo img{
+    height:70px;
+}
+
+.menu{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#333;
+    font-weight:600;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#1b8c5a;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 26px;
+    background:#1b8c5a;
+    color:#fff;
+    text-decoration:none;
+    border-radius:50px;
+    transition:.3s;
+    font-weight:600;
+}
+
+.btn:hover{
+    background:#166d47;
+}
+
+.btn-outline{
+    display:inline-block;
+    padding:14px 26px;
+    border:2px solid #1b8c5a;
+    color:#1b8c5a;
+    text-decoration:none;
+    border-radius:50px;
+    margin-left:15px;
+    transition:.3s;
+    font-weight:600;
+}
+
+.btn-outline:hover{
+    background:#1b8c5a;
+    color:#fff;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    padding:160px 0 90px;
+    background:linear-gradient(#eefbf5,#ffffff);
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:50px;
+}
+
+.badge{
+    display:inline-block;
+    background:#d8f8e9;
+    color:#16834f;
+    padding:8px 18px;
+    border-radius:30px;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.hero h1{
+    font-size:54px;
+    line-height:1.2;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#1b8c5a;
+}
+
+.hero p{
+    font-size:18px;
+    color:#666;
+    margin-bottom:30px;
+}
+
+.hero-button{
+    margin-bottom:40px;
+}
+
+.hero-image img{
+    width:90%;
+    margin:auto;
+}
+
+/* ================= COUNTER ================= */
+
+.counter{
+    display:flex;
+    gap:50px;
+}
+
+.counter h2{
+    color:#1b8c5a;
+    font-size:36px;
+}
+
+.counter p{
+    margin:0;
+    color:#777;
+}
+
+/* ================= SECTION ================= */
+
+section{
+    padding:90px 0;
+}
+
+.title{
+    text-align:center;
+    font-size:38px;
+    margin-bottom:50px;
+    color:#1b8c5a;
+}
+
+.about{
+    text-align:center;
+    background:#fff;
+}
+
+.about p{
+    max-width:800px;
+    margin:auto;
+    color:#666;
+    font-size:18px;
+}
+
